@@ -1,0 +1,29 @@
+import pandas as pd
+import plotly.offline as py
+import plotly.graph_objs as go
+import plotly.express as px
+
+py.init_notebook_mode(connected=True)
+
+df = pd.read_csv("https://raw.githubusercontent.com/LucasMoacir/fabrinilton/main/teste2.csv")
+print(df)
+
+t = df['Código do aeroporto']
+v = df['Quantidade 2020']
+a = df['Quantidade 2021']
+
+stack1 = go.Bar(x = t,
+                y = v,
+                name = 'Jan 2020',
+                marker = {'color': '#ee5253'})
+stack2 = go.Bar(x = t,
+                y = a,
+                name = 'Jan 2021',
+                marker = {'color': '#341f97'})
+data = [stack1, stack2]
+layout = go.Layout(title = 'Gráfico de barras do <a href=\'https://plot.ly/\'>Plotly</a>',
+                   xaxis = {'title': 'Aeródromos'},
+                   yaxis = {'title': 'Movimentação de passageiros'},
+                   barmode = 'stack')
+fig = go.Figure(data=data, layout=layout)
+py.iplot(fig)
