@@ -63,7 +63,7 @@ data2 = [linha, pontos]#gráfico dois terminou
 layout = go.Layout(title = 'Movimento dos Estados',#Adiciona um título ao gráfico
                    xaxis = {'title': 'Estados'},#adiciona um 'sentido' a x
                    yaxis = {'title': 'Movimentação de passageiros'},#adiciona um 'sentido' a y
-                   xaxis_tickangle=-45)#'angulação do aeódromos para melhor visualização
+                   xaxis_tickangle=-45)#'angulação do estados para melhor visualização
 
 #Imprimir o gráfico 1
 fig = go.Figure(data=data, layout=layout)
@@ -73,7 +73,7 @@ py.iplot(fig)
 layout2 = go.Layout(title = 'Variação nos Estados',#Adiciona um título ao gráfico
                    xaxis = {'title': 'Estados'},#adiciona um 'sentido' a x
                    yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
-                   xaxis_tickangle=-45)#'angulação do aeódromos para melhor visualização
+                   xaxis_tickangle=-45)#'angulação do estados para melhor visualização
 
 #Imprimir o gráfico 2
 fig2 = go.Figure(data=data2, layout=layout2)
