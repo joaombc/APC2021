@@ -1,4 +1,4 @@
-#Bibliotecas utilizadas
+​#Bibliotecas Importadas
 import pandas as pd
 import plotly.offline as py
 import plotly.graph_objs as go
@@ -77,32 +77,4 @@ layout2 = go.Layout(title = 'Variação nos Aeródromos das Capitais',#Adiciona 
 
 #Imprimir o gráfico 1
 fig2 = go.Figure(data=data2, layout=layout2)
-py.iplot(fig2)
-                   mode = 'markers',
-                   name = 'Variação',
-                   marker =  {'color' : '#000000',
-                              'line' : {'width': 1,
-                                        'color': '#000000'}},
-                   opacity=.8)#ponto
-
-
-
-layout = go.Layout(title = 'Movimento nos Aeródromos das Capitais',
-                   xaxis = {'title': 'Aeródromos das Capitais'},
-                   yaxis = {'title': 'Movimentação de passageiros'},
-                   xaxis_tickangle=-45)
-
-
-
-fig = go.Figure(data=data, layout=layout)
-py.iplot(fig)
-
-data2 = [linha, pontos]#gráfico dois terminou
-layout2 = go.Layout(title = 'Variação nos Aeródromos das Capitais',
-                   xaxis = {'title': 'Aeródromos das Capitais'},
-                   yaxis = {'title': 'Variação (%)'},
-                   xaxis_tickangle=-45)
-
-fig2 = go.Figure(data=data2, layout=layout2)
-
 py.iplot(fig2)
