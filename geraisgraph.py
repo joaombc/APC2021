@@ -163,7 +163,7 @@ layout1 = go.Layout(title = 'Movimento dos estados brasileiros',
 
 layout1_1 = go.Layout(title = 'Taxa de redução de cada estado',
                       xaxis ={'title': 'Estados'},
-                      yaxis ={'title' : 'Variação (%)'},
+                      yaxis ={'title' : 'Variação da quantidade de passageiros (%)'},
                       xaxis_tickangle = -45,
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
@@ -177,7 +177,7 @@ layout2 = go.Layout(title = 'Movimento nos aeródromos por capital',
 
 layout2_1 = go.Layout(title = 'Variação nos aeródromos por capital',
                       xaxis ={'title': 'Aeródromos das capitais'},
-                      yaxis ={'title': 'Variação (%)'},
+                      yaxis ={'title': 'Variação da quantidade de passageiros (%)'},
                       xaxis_tickangle = -45,
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
@@ -191,7 +191,7 @@ layout3 = go.Layout(title = 'Movimento das Regiões',#Adiciona um título ao gr�
 
 layout3_1 = go.Layout(title = 'Variação das Regiões',#Adiciona um título ao gráfico
                       xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
-                      yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
+                      yaxis = {'title': 'Variação da quantidade de passageiros (%)'},#adiciona um 'sentido' a y
                       xaxis_tickangle=-45,#'angulação do estados para melhor visualização
                       paper_bgcolor='rgba(0,0,0,0)',
                       plot_bgcolor='rgba(0,0,0,0)')
