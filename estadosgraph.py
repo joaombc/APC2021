@@ -72,7 +72,7 @@ py.iplot(fig)
 #"estilizar" o gráfico 2
 layout2 = go.Layout(title = 'Variação nos Estados',#Adiciona um título ao gráfico
                    xaxis = {'title': 'Estados'},#adiciona um 'sentido' a x
-                   yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
+                   yaxis = {'title': 'Variação da quantidade de passageiros (%)'},#adiciona um 'sentido' a y
                    xaxis_tickangle=-45)#'angulação do estados para melhor visualização
 
 #Imprimir o gráfico 2
