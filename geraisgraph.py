@@ -1,81 +1,228 @@
-#Bibliotecas importadas
+#Biblioptecas importadas
 import pandas as pd
 import plotly.offline as py
 import plotly.graph_objs as go
 import plotly.express as px
-import numpy as np
 
 py.init_notebook_mode(connected=True)
 
 #utilizamos o pandas para abrir o arquivo csv
-df = pd.read_csv("https://raw.githubusercontent.com/joaombc/APC2021/main/geral2.csv")
+df1 = pd.read_csv('https://raw.githubusercontent.com/joaombc/APC2021/main/separado_por_estado.csv')
+dados1 = df1.values
+df2 = pd.read_csv('https://raw.githubusercontent.com/joaombc/APC2021/main/Separado%20por%20Capital.csv')
+dados2 = df2.values
+df3 = pd.read_csv('https://raw.githubusercontent.com/joaombc/APC2021/main/regioes.csv')
+dados3 = df3.values
 
-#colocamos os dados dessa tabela em uma lista dentro de uma outra lista
-dados = df.values
 
+''' PLANILHA SEPARADA POR ESTADO
+dados1[:,0] # Estado
+dados1[:,1] # Jan 2020
+dados1[:,2] # Jan 2021
+dados1[:,3] # Variação
 '''
-Os principais valores das colunas dessa lista dentro da lista 
--------> está pegando todos os valores da 1a, 3a, 4a, 5a, 6a coluna, respectivamente.
-dados[:,0]#Aeródromos
-dados[:,2]#municipios
-dados[:,3]#Quantidade de passageiros em Jan 2020
-dados[:,4]#Quantidade de passageiros em Jan 2021
-dados[:,5]#Variação (%) da quantidade de passageiros
+
+''' PLANILHA SEPARADA POR CAPITAL
+dados3[:,0] # Código ICAO
+dados3[:,1] # Aeródromo
+dados3[:,2] # Município
+dados3[:,3] # Jan 2020
+dados3[:,4] # Jan 2021
+dados3[:,5] # Variação
 '''
 
-aero_e_municipios = dados[:,0] + chr(32) + dados[:,2]#Aeródromos + municipios
-jan_2020 = dados[:,3]#Quantidade de passageiros em Jan 2020
-jan_2021 = dados[:,4]#Quantidade de passageiros em Jan 2021
-variacao = dados[:,5]#Variação (%) da quantidade de passageiros
+''' PLANILHA SEPARADA POR REGIÃO
+dados2[:,0] # Região
+dados2[:,1] # Jan 2020
+dados2[:,2] # Jan 2021
+dados2[:,3] # Variação
+'''
 
-#Gráfico um começa aqui
-barra_jan_2020 = go.Bar(x = aero_e_municipios,
-                y = jan_2020,
-                name = 'Jan 2020',
-                marker = {'color': '#774ef0'})#barra jan 2020
-barra_jan_2021 = go.Bar(x = aero_e_municipios,
-                y = jan_2021,
-                name = 'Jan 2021',
-                marker = {'color': '#ff4e39'})#barra jan 2021
+estados = dados1[:,0] #Estados
+quantidade_2020_1 = dados1[:,1] # Jan 2020
+quantidade_2021_1 = dados1[:,2] # Jan 2021
+taxa_de_variacao1 = dados1[:,3] # Variação
 
-data = [barra_jan_2020, barra_jan_2021]
-#Gráfico um terminou
+codigo_e_municipio1 = dados2[:,0] + chr(32) + dados2[:,2] # Código ICAO + Municípios
+quantidade_2020_2 = dados2[:,3] # Jan 2020
+quantidade_2021_2 = dados2[:,4] # Jan 2021
+taxa_de_variacao2 = dados2[:,5] # Variação
 
-#Gráfico dois começa aqui
-linha = go.Scatter(x = aero_e_municipios,
-                    y = variacao,
+regiao = dados3[:,0]#regiao
+quantidade_2020_3 = dados3[:,1] # Jan 2020
+quantidade_2021_3 = dados3[:,2] # Jan 2021
+taxa_de_variacao3 = dados3[:,3] # Variação
+
+'''Gráficos dos estados, capitais e regiões, respectivamente'''
+
+barra1 = go.Bar(x = estados,
+                y = quantidade_2020_1,
+                name = 'Jan/2020',
+                marker ={
+                        'color' : '#774ef0'
+                })
+
+barra1_1 = go.Bar(x = estados,
+                  y = quantidade_2021_1,
+                  name = 'Jan/2021',
+                  marker ={
+                           'color' : '#ff4e39'
+                  })
+
+linha1 = go.Scatter(x = estados,
+                    y = taxa_de_variacao1,
+                    mode = 'lines',
+                    name = 'Linha variável',
+                    line ={'color' : '#ee5253',
+                            'dash' : 'dash'
+                    })
+
+pontos1 = go.Scatter(x = estados,
+                     y = taxa_de_variacao1,
+                     mode = 'markers',
+                     name = 'Variação',
+                     opacity = .8,
+                     marker ={'color' : '#000000',
+                              'line' :{'width' : 1,
+                                        'color' : '#000000'}
+                     })
+
+barra2 = go.Bar(x = codigo_e_municipio1,
+                y = quantidade_2020_2,
+                name = 'Jan/2020',
+                marker ={
+                        'color' : '#774ef0'
+                })
+
+barra2_1 = go.Bar(x = codigo_e_municipio1,
+                  y = quantidade_2021_2,
+                  name = 'Jan/2021',
+                  marker ={
+                           'color' : '#ff4e39'
+                  })
+
+linha2 = go.Scatter(x = codigo_e_municipio1,
+                    y = taxa_de_variacao2,
+                    mode = 'lines',
+                    name = 'Linha variável',
+                    line ={'color' : '#ee5253',
+                            'dash' : 'dash'
+                    })
+
+pontos2 = go.Scatter(x = codigo_e_municipio1,
+                     y = taxa_de_variacao2,
+                     mode = 'markers',
+                     name = 'Variação',
+                     opacity = .8,
+                     marker ={'color' : '#000000',
+                             'line' :{'width' : 1,'color' : '#000000'}
+                     })
+
+barra_3 = go.Bar(x = regiao,
+                 y = quantidade_2020_3,
+                 name = 'Jan 2020',
+                 marker = {'color': '#774ef0'})#barra jan 2020
+barra_3_1 = go.Bar(x = regiao,
+                   y = quantidade_2021_3,
+                   name = 'Jan 2021',
+                   marker = {'color': '#ff4e39'})#barra jan 2021
+
+linha3 = go.Scatter(x = regiao,
+                    y = taxa_de_variacao3,
                     mode = 'lines',
                     name = '',
                     line = {'color': '#ee5253',
                             'dash': 'dash'})#linha
 
-pontos = go.Scatter(x = aero_e_municipios,
-                   y = variacao,
+pontos3 = go.Scatter(x = regiao,
+                   y = taxa_de_variacao3,
                    mode = 'markers',
                    name = 'Variação',
                    marker =  {'color' : '#000000',
-                              'line' : {'width': 1,
-                                        'color': '#000000'}},
+                              'line' : {'width': 1,'color': '#000000'}},
                    opacity=.8)#ponto
-data2 = [linha, pontos]
-#Gráfico dois terminou
 
-#"estilizar" o gráfico 1
-layout = go.Layout(title = 'Movimento nos Aeródromos Gerais',#Adiciona um título ao gráfico
-                   xaxis = {'title': 'Aeródromos Gerais'},#adiciona um 'sentido' a x
-                   yaxis = {'title': 'Movimentação de passageiros'},#adiciona um 'sentido' a y
-                   xaxis_tickangle=-45)#'angulação do aeódromos para melhor visualização
+stack1 = go.Bar(x = regiao,
+                y = quantidade_2020_3,
+                name = 'Jan 2020',
+                marker = {'color': '#774ef0'})
 
-#Imprimir o gráfico 1
-fig = go.Figure(data=data, layout=layout)
-py.iplot(fig)
+stack2 = go.Bar(x = regiao,
+                y = quantidade_2021_3,
+                name = 'Jan 2021',
+                marker = {'color': '#ff4e39'})
 
-#"estilizar" o gráfico 2
-layout2 = go.Layout(title = 'Variação nos Aeródromos Gerais',#Adiciona um título ao gráfico
-                   xaxis = {'title': 'Aeródromos Gerais'},#adiciona um 'sentido' a x
-                   yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
-                   xaxis_tickangle=-45)#'angulação do aeódromos para melhor visualização
+#Estilizando os gráficos
 
-#Imprimir o gráfico 2
-fig2 = go.Figure(data=data2, layout=layout2)
+layout1 = go.Layout(title = 'Movimento dos estados brasileiros',
+                    xaxis ={'title': 'Estados'},
+                    yaxis ={'title': 'Movimentação de passageiros'},
+                    xaxis_tickangle = -45,
+                    paper_bgcolor = 'rgba(0,0,0,0)',
+                    plot_bgcolor = 'rgba(0,0,0,0)')
+
+layout1_1 = go.Layout(title = 'Taxa de redução de cada estado',
+                      xaxis ={'title': 'Estados'},
+                      yaxis ={'title' : 'Variação (%)'},
+                      xaxis_tickangle = -45,
+                      paper_bgcolor = 'rgba(0,0,0,0)',
+                      plot_bgcolor = 'rgba(0,0,0,0)')
+
+layout2 = go.Layout(title = 'Movimento nos aeródromos por capital',
+                    xaxis ={'title': 'Aeródromos das capitais'},
+                    yaxis ={'title': 'Movimentação de passageiros'},
+                    xaxis_tickangle = -45,
+                    paper_bgcolor = 'rgba(0,0,0,0)',
+                    plot_bgcolor = 'rgba(0,0,0,0)')
+
+layout2_1 = go.Layout(title = 'Variação nos aeródromos por capital',
+                      xaxis ={'title': 'Aeródromos das capitais'},
+                      yaxis ={'title': 'Variação (%)'},
+                      xaxis_tickangle = -45,
+                      paper_bgcolor = 'rgba(0,0,0,0)',
+                      plot_bgcolor = 'rgba(0,0,0,0)')
+
+layout3 = go.Layout(title = 'Movimento das Regiões',#Adiciona um título ao gráfico
+                    xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
+                    yaxis = {'title': 'Movimentação de passageiros'},#adiciona um 'sentido' a y
+                    xaxis_tickangle=-45,#'angulação do estados para melhor visualização
+                    paper_bgcolor='rgba(0,0,0,0)',
+                    plot_bgcolor='rgba(0,0,0,0)')
+
+layout3_1 = go.Layout(title = 'Variação das Regiões',#Adiciona um título ao gráfico
+                      xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
+                      yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
+                      xaxis_tickangle=-45,#'angulação do estados para melhor visualização
+                      paper_bgcolor='rgba(0,0,0,0)',
+                      plot_bgcolor='rgba(0,0,0,0)')
+
+layout3_2 = go.Layout(title = 'Somatório de Jan 2020 & Jan 2021',
+                      xaxis = {'title': 'Regiões'},
+                      yaxis = {'title': 'Movimentação de passageiros'},
+                      barmode = 'stack',
+                      paper_bgcolor='rgba(0,0,0,0)',
+                      plot_bgcolor='rgba(0,0,0,0)')
+
+data1 = [barra1, barra1_1]
+data1_1 = [linha1, pontos1]
+data2 = [barra2, barra2_1]
+data2_1 = [linha2, pontos2]
+data3 = [barra_3,barra_3_1]
+data3_1 = [linha3, pontos3]
+data3_2 = [stack1, stack2]
+
+fig1 = go.Figure(data = data1,layout = layout1)
+fig1_1 = go.Figure(data = data1_1,layout = layout1_1)
+fig2 = go.Figure(data = data2,layout = layout2)
+fig2_1 = go.Figure(data = data2_1,layout = layout2_1)
+fig3 = go.Figure(data = data3,layout = layout3)
+fig3_1 = go.Figure(data = data3_1,layout = layout3_1)
+fig3_2 = go.Figure(data = data3_2,layout = layout3_2)
+
+py.iplot(fig3_2)
+py.iplot(fig3)
+py.iplot(fig3_1)
+py.iplot(fig1)
+py.iplot(fig1_1)
 py.iplot(fig2)
+py.iplot(fig2_1)
