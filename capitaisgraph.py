@@ -72,7 +72,7 @@ py.iplot(fig)
 #"estilizar" o gráfico 2
 layout2 = go.Layout(title = 'Variação nos Aeródromos das Capitais',#Adiciona um título ao gráfico
                    xaxis = {'title': 'Aeródromos das Capitais'},#adiciona um 'sentido' a x
-                   yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
+                   yaxis = {'title': 'Variação da quantidade de passageiros (%)'},#adiciona um 'sentido' a y
                    xaxis_tickangle=-45)#'angulação dos aeódromos para melhor visualização
 
 #Imprimir o gráfico 1
