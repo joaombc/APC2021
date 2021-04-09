@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.offline as py
 import plotly.graph_objs as go
 import plotly.express as px
+from plotly.subplots import make_subplots
 
 py.init_notebook_mode(connected=True)
 
@@ -118,6 +119,17 @@ pontos2 = go.Scatter(x = codigo_e_municipio1,
                              'line' :{'width' : 1,'color' : '#000000'}
                      })
 
+sub = make_subplots(1, 2, specs=[[{'type':'domain'}, {'type':'domain'}]],
+                    subplot_titles=['Jan 2020', 'Jan 2021'])
+
+sub.add_trace(go.Pie(labels=dados2[:,0], values=dados2[:,3], scalegroup='one',
+                     name="Jan 2020"), 1, 1)
+
+sub.add_trace(go.Pie(labels=dados2[:,0], values=dados2[:,4], scalegroup='one',
+                     name="Jan 2021"), 1, 2)
+
+sub.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021')
+
 barra_3 = go.Bar(x = regiao,
                  y = quantidade_2020_3,
                  name = 'Jan 2020',
@@ -163,7 +175,7 @@ layout1 = go.Layout(title = 'Movimento dos estados brasileiros',
 
 layout1_1 = go.Layout(title = 'Taxa de redução de cada estado',
                       xaxis ={'title': 'Estados'},
-                      yaxis ={'title' : 'Variação da quantidade de passageiros (%)'},
+                      yaxis ={'title' : 'Variação (%)'},
                       xaxis_tickangle = -45,
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
@@ -177,10 +189,11 @@ layout2 = go.Layout(title = 'Movimento nos aeródromos por capital',
 
 layout2_1 = go.Layout(title = 'Variação nos aeródromos por capital',
                       xaxis ={'title': 'Aeródromos das capitais'},
-                      yaxis ={'title': 'Variação da quantidade de passageiros (%)'},
+                      yaxis ={'title': 'Variação (%)'},
                       xaxis_tickangle = -45,
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
+
 
 layout3 = go.Layout(title = 'Movimento das Regiões',#Adiciona um título ao gráfico
                     xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
@@ -191,7 +204,7 @@ layout3 = go.Layout(title = 'Movimento das Regiões',#Adiciona um título ao gr�
 
 layout3_1 = go.Layout(title = 'Variação das Regiões',#Adiciona um título ao gráfico
                       xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
-                      yaxis = {'title': 'Variação da quantidade de passageiros (%)'},#adiciona um 'sentido' a y
+                      yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
                       xaxis_tickangle=-45,#'angulação do estados para melhor visualização
                       paper_bgcolor='rgba(0,0,0,0)',
                       plot_bgcolor='rgba(0,0,0,0)')
@@ -213,6 +226,7 @@ data3_2 = [stack1, stack2]
 
 fig1 = go.Figure(data = data1,layout = layout1)
 fig1_1 = go.Figure(data = data1_1,layout = layout1_1)
+fig1_2 = go.Figure(data=[go.Pie(labels=estados, values=quantidade_2020_1 + quantidade_2021_1)])
 fig2 = go.Figure(data = data2,layout = layout2)
 fig2_1 = go.Figure(data = data2_1,layout = layout2_1)
 fig3 = go.Figure(data = data3,layout = layout3)
@@ -222,7 +236,9 @@ fig3_2 = go.Figure(data = data3_2,layout = layout3_2)
 py.iplot(fig3_2)
 py.iplot(fig3)
 py.iplot(fig3_1)
+fig1_2.show()
 py.iplot(fig1)
 py.iplot(fig1_1)
+sub.show()
 py.iplot(fig2)
 py.iplot(fig2_1)
