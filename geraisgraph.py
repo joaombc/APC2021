@@ -2,7 +2,6 @@
 import pandas as pd
 import plotly.offline as py
 import plotly.graph_objs as go
-import plotly.express as px
 from plotly.subplots import make_subplots
 
 py.init_notebook_mode(connected=True)
@@ -24,19 +23,19 @@ dados1[:,3] # Variação
 '''
 
 ''' PLANILHA SEPARADA POR CAPITAL
-dados3[:,0] # Código ICAO
-dados3[:,1] # Aeródromo
-dados3[:,2] # Município
-dados3[:,3] # Jan 2020
-dados3[:,4] # Jan 2021
-dados3[:,5] # Variação
+dados2[:,0] # Código ICAO
+dados2[:,1] # Aeródromo
+dados2[:,2] # Município
+dados2[:,3] # Jan 2020
+dados2[:,4] # Jan 2021
+dados2[:,5] # Variação
 '''
 
 ''' PLANILHA SEPARADA POR REGIÃO
-dados2[:,0] # Região
-dados2[:,1] # Jan 2020
-dados2[:,2] # Jan 2021
-dados2[:,3] # Variação
+dados3[:,0] # Região
+dados3[:,1] # Jan 2020
+dados3[:,2] # Jan 2021
+dados3[:,3] # Variação
 '''
 
 estados = dados1[:,0] #Estados
@@ -73,7 +72,7 @@ barra1_1 = go.Bar(x = estados,
 linha1 = go.Scatter(x = estados,
                     y = taxa_de_variacao1,
                     mode = 'lines',
-                    name = 'Linha variável',
+                    name = '',
                     line ={'color' : '#ee5253',
                             'dash' : 'dash'
                     })
@@ -105,7 +104,7 @@ barra2_1 = go.Bar(x = codigo_e_municipio1,
 linha2 = go.Scatter(x = codigo_e_municipio1,
                     y = taxa_de_variacao2,
                     mode = 'lines',
-                    name = 'Linha variável',
+                    name = '',
                     line ={'color' : '#ee5253',
                             'dash' : 'dash'
                     })
@@ -122,13 +121,12 @@ pontos2 = go.Scatter(x = codigo_e_municipio1,
 sub = make_subplots(1, 2, specs=[[{'type':'domain'}, {'type':'domain'}]],
                     subplot_titles=['Jan 2020', 'Jan 2021'])
 
-sub.add_trace(go.Pie(labels=dados2[:,0], values=dados2[:,3], scalegroup='one',
+sub.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,3], scalegroup='one',
                      name="Jan 2020"), 1, 1)
 
-sub.add_trace(go.Pie(labels=dados2[:,0], values=dados2[:,4], scalegroup='one',
+sub.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,4], scalegroup='two',
                      name="Jan 2021"), 1, 2)
 
-sub.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021')
 
 barra_3 = go.Bar(x = regiao,
                  y = quantidade_2020_3,
@@ -194,7 +192,6 @@ layout2_1 = go.Layout(title = 'Variação nos aeródromos por capital',
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
 
-
 layout3 = go.Layout(title = 'Movimento das Regiões',#Adiciona um título ao gráfico
                     xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
                     yaxis = {'title': 'Movimentação de passageiros'},#adiciona um 'sentido' a y
@@ -216,6 +213,8 @@ layout3_2 = go.Layout(title = 'Somatório de Jan 2020 & Jan 2021',
                       paper_bgcolor='rgba(0,0,0,0)',
                       plot_bgcolor='rgba(0,0,0,0)')
 
+sub.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021 para cada Estado')
+
 data1 = [barra1, barra1_1]
 data1_1 = [linha1, pontos1]
 data2 = [barra2, barra2_1]
@@ -227,6 +226,7 @@ data3_2 = [stack1, stack2]
 fig1 = go.Figure(data = data1,layout = layout1)
 fig1_1 = go.Figure(data = data1_1,layout = layout1_1)
 fig1_2 = go.Figure(data=[go.Pie(labels=estados, values=quantidade_2020_1 + quantidade_2021_1)])
+fig1_2.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Estado')
 fig2 = go.Figure(data = data2,layout = layout2)
 fig2_1 = go.Figure(data = data2_1,layout = layout2_1)
 fig3 = go.Figure(data = data3,layout = layout3)
