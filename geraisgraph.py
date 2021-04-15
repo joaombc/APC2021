@@ -14,7 +14,6 @@ dados2 = df2.values
 df3 = pd.read_csv('https://raw.githubusercontent.com/joaombc/APC2021/main/regioes.csv')
 dados3 = df3.values
 
-
 ''' PLANILHA SEPARADA POR ESTADO
 dados1[:,0] # Estado
 dados1[:,1] # Jan 2020
@@ -127,7 +126,6 @@ sub.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:
 sub.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,4], scalegroup='two',
                      name="Jan 2021"), 1, 2)
 
-
 barra_3 = go.Bar(x = regiao,
                  y = quantidade_2020_3,
                  name = 'Jan 2020',
@@ -163,7 +161,6 @@ stack2 = go.Bar(x = regiao,
                 marker = {'color': '#ff4e39'})
 
 #Estilizando os gráficos
-
 layout1 = go.Layout(title = 'Movimento dos estados brasileiros',
                     xaxis ={'title': 'Estados'},
                     yaxis ={'title': 'Movimentação de passageiros'},
