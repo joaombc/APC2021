@@ -42,7 +42,7 @@ quantidade_2020_1 = dados1[:,1] # Jan 2020
 quantidade_2021_1 = dados1[:,2] # Jan 2021
 taxa_de_variacao1 = dados1[:,3] # Variação
 
-codigo_e_municipio1 = dados2[:,0] + chr(32) + dados2[:,2] # Código ICAO + Municípios
+codigo_e_municipio1 = dados2[:,0] + chr(32) + dados2[:,2] # Código ICAO + ascii + Municípios
 quantidade_2020_2 = dados2[:,3] # Jan 2020
 quantidade_2021_2 = dados2[:,4] # Jan 2021
 taxa_de_variacao2 = dados2[:,5] # Variação
