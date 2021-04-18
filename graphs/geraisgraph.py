@@ -210,7 +210,7 @@ layout_stack_regioes = go.Layout(title = 'Somatório de Jan 2020 & Jan 2021',
                       paper_bgcolor='rgba(0,0,0,0)',
                       plot_bgcolor='rgba(0,0,0,0)')
 
-pie_graph_capitais.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021 para cada Estado')
+pie_graph_capitais.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021 para cada Capital')
 
 data_estados_barra = [barra_estados_2020, barra_estados_2021]
 data_estados_variacao = [linha_variacao_estados, ponto_variacao_estados]
@@ -223,7 +223,7 @@ data_regioes_stack = [stack_regioes_2020, stack_regioes_2021]
 fig_barras_estados = go.Figure(data = data_estados_barra,layout = layout_barra_estados)
 fig_variacao_estados = go.Figure(data = data_estados_variacao,layout = layout_variacao_estados)
 fig_pizza_estados = go.Figure(data=[go.Pie(labels=estados, values=quantidade_2020_1 + quantidade_2021_1)])
-fig_pizza_estados.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Capital')
+fig_pizza_estados.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Estado')
 fig_barra_capitais = go.Figure(data = data_capitais_barra,layout = layout_barra_capital)
 fig_variacao_capitais = go.Figure(data = data_capitais_variacao,layout = layout_variacao_capital)
 fig_barras_regioes = go.Figure(data = data_regioes_barra,layout = layout_barra_regioes)
