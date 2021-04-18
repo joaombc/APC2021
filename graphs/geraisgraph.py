@@ -2,7 +2,7 @@
 import pandas as pd
 import plotly.offline as py
 import plotly.graph_objs as go
-from plotly.pie_graph_capitaisplots import make_pie_graph_capitaisplots
+from plotly.subplots import make_subplots
 
 py.init_notebook_mode(connected=True)
 
@@ -117,8 +117,8 @@ ponto_variacao_capitais = go.Scatter(x = codigo_e_municipio1,
                              'line' :{'width' : 1,'color' : '#000000'}
                      })
 
-pie_graph_capitais = make_pie_graph_capitaisplots(1, 2, specs=[[{'type':'domain'}, {'type':'domain'}]],
-                    pie_graph_capitaisplot_titles=['Jan 2020', 'Jan 2021'])
+pie_graph_capitais = make_subplots(1, 2, specs=[[{'type':'domain'}, {'type':'domain'}]],
+                    subplot_titles=['Jan 2020', 'Jan 2021'])
 
 pie_graph_capitais.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,3], scalegroup='one',
                      name="Jan 2020"), 1, 1)
@@ -223,7 +223,7 @@ data_regioes_stack = [stack_regioes_2020, stack_regioes_2021]
 fig_barras_estados = go.Figure(data = data_estados_barra,layout = layout_barra_estados)
 fig_variacao_estados = go.Figure(data = data_estados_variacao,layout = layout_variacao_estados)
 fig_pizza_estados = go.Figure(data=[go.Pie(labels=estados, values=quantidade_2020_1 + quantidade_2021_1)])
-fig_pizza_estados.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Estado')
+fig_pizza_estados.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Capital')
 fig_barra_capitais = go.Figure(data = data_capitais_barra,layout = layout_barra_capital)
 fig_variacao_capitais = go.Figure(data = data_capitais_variacao,layout = layout_variacao_capital)
 fig_barras_regioes = go.Figure(data = data_regioes_barra,layout = layout_barra_regioes)
