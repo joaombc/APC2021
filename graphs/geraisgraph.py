@@ -2,7 +2,7 @@
 import pandas as pd
 import plotly.offline as py
 import plotly.graph_objs as go
-from plotly.subplots import make_subplots
+from plotly.pie_graph_capitaisplots import make_pie_graph_capitaisplots
 
 py.init_notebook_mode(connected=True)
 
@@ -54,21 +54,21 @@ taxa_de_variacao3 = dados3[:,3] # Variação
 
 '''Gráficos dos estados, capitais e regiões, respectivamente'''
 
-barra1 = go.Bar(x = estados,
+barra_estados_2020 = go.Bar(x = estados,
                 y = quantidade_2020_1,
                 name = 'Jan/2020',
                 marker ={
                         'color' : '#774ef0'
                 })
 
-barra1_1 = go.Bar(x = estados,
+barra_estados_2021 = go.Bar(x = estados,
                   y = quantidade_2021_1,
                   name = 'Jan/2021',
                   marker ={
                            'color' : '#ff4e39'
                   })
 
-linha1 = go.Scatter(x = estados,
+linha_variacao_estados = go.Scatter(x = estados,
                     y = taxa_de_variacao1,
                     mode = 'lines',
                     name = '',
@@ -76,7 +76,7 @@ linha1 = go.Scatter(x = estados,
                             'dash' : 'dash'
                     })
 
-pontos1 = go.Scatter(x = estados,
+ponto_variacao_estados = go.Scatter(x = estados,
                      y = taxa_de_variacao1,
                      mode = 'markers',
                      name = 'Variação',
@@ -86,21 +86,21 @@ pontos1 = go.Scatter(x = estados,
                                         'color' : '#000000'}
                      })
 
-barra2 = go.Bar(x = codigo_e_municipio1,
+barra_capitais_2020 = go.Bar(x = codigo_e_municipio1,
                 y = quantidade_2020_2,
                 name = 'Jan/2020',
                 marker ={
                         'color' : '#774ef0'
                 })
 
-barra2_1 = go.Bar(x = codigo_e_municipio1,
+barra_capitais_2021 = go.Bar(x = codigo_e_municipio1,
                   y = quantidade_2021_2,
                   name = 'Jan/2021',
                   marker ={
                            'color' : '#ff4e39'
                   })
 
-linha2 = go.Scatter(x = codigo_e_municipio1,
+linha_variacao_capitais = go.Scatter(x = codigo_e_municipio1,
                     y = taxa_de_variacao2,
                     mode = 'lines',
                     name = '',
@@ -108,7 +108,7 @@ linha2 = go.Scatter(x = codigo_e_municipio1,
                             'dash' : 'dash'
                     })
 
-pontos2 = go.Scatter(x = codigo_e_municipio1,
+ponto_variacao_capitais = go.Scatter(x = codigo_e_municipio1,
                      y = taxa_de_variacao2,
                      mode = 'markers',
                      name = 'Variação',
@@ -117,125 +117,127 @@ pontos2 = go.Scatter(x = codigo_e_municipio1,
                              'line' :{'width' : 1,'color' : '#000000'}
                      })
 
-sub = make_subplots(1, 2, specs=[[{'type':'domain'}, {'type':'domain'}]],
-                    subplot_titles=['Jan 2020', 'Jan 2021'])
+pie_graph_capitais = make_pie_graph_capitaisplots(1, 2, specs=[[{'type':'domain'}, {'type':'domain'}]],
+                    pie_graph_capitaisplot_titles=['Jan 2020', 'Jan 2021'])
 
-sub.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,3], scalegroup='one',
+pie_graph_capitais.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,3], scalegroup='one',
                      name="Jan 2020"), 1, 1)
 
-sub.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,4], scalegroup='two',
+pie_graph_capitais.add_trace(go.Pie(labels=dados2[:,0] + chr(32) + dados2[:,2], values=dados2[:,4], scalegroup='two',
                      name="Jan 2021"), 1, 2)
 
-barra_3 = go.Bar(x = regiao,
+barra_regioes_2020 = go.Bar(x = regiao,
                  y = quantidade_2020_3,
                  name = 'Jan 2020',
-                 marker = {'color': '#774ef0'})#barra jan 2020
-barra_3_1 = go.Bar(x = regiao,
+                 marker = {'color': '#774ef0'})
+barra_regioes_2021 = go.Bar(x = regiao,
                    y = quantidade_2021_3,
                    name = 'Jan 2021',
-                   marker = {'color': '#ff4e39'})#barra jan 2021
+                   marker = {'color': '#ff4e39'})
 
-linha3 = go.Scatter(x = regiao,
+linha_variacao_regioes = go.Scatter(x = regiao,
                     y = taxa_de_variacao3,
                     mode = 'lines',
                     name = '',
                     line = {'color': '#ee5253',
-                            'dash': 'dash'})#linha
+                            'dash': 'dash'})
 
-pontos3 = go.Scatter(x = regiao,
+ponto_variacao_regioes = go.Scatter(x = regiao,
                    y = taxa_de_variacao3,
                    mode = 'markers',
                    name = 'Variação',
                    marker =  {'color' : '#000000',
                               'line' : {'width': 1,'color': '#000000'}},
-                   opacity=.8)#ponto
+                   opacity=.8)
 
-stack1 = go.Bar(x = regiao,
+stack_regioes_2020 = go.Bar(x = regiao,
                 y = quantidade_2020_3,
                 name = 'Jan 2020',
                 marker = {'color': '#774ef0'})
 
-stack2 = go.Bar(x = regiao,
+stack_regioes_2021 = go.Bar(x = regiao,
                 y = quantidade_2021_3,
                 name = 'Jan 2021',
                 marker = {'color': '#ff4e39'})
 
 #Estilizando os gráficos
-layout1 = go.Layout(title = 'Movimento dos estados brasileiros',
+layout_barra_estados = go.Layout(title = 'Movimento dos estados brasileiros',
                     xaxis ={'title': 'Estados'},
                     yaxis ={'title': 'Movimentação de passageiros'},
                     xaxis_tickangle = -45,
                     paper_bgcolor = 'rgba(0,0,0,0)',
                     plot_bgcolor = 'rgba(0,0,0,0)')
 
-layout1_1 = go.Layout(title = 'Taxa de redução de cada estado',
+layout_variacao_estados = go.Layout(title = 'Taxa de redução de cada estado',
                       xaxis ={'title': 'Estados'},
                       yaxis ={'title' : 'Variação (%)'},
                       xaxis_tickangle = -45,
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
 
-layout2 = go.Layout(title = 'Movimento nos aeródromos por capital',
+layout_barra_capital = go.Layout(title = 'Movimento nos aeródromos por capital',
                     xaxis ={'title': 'Aeródromos das capitais'},
                     yaxis ={'title': 'Movimentação de passageiros'},
                     xaxis_tickangle = -45,
                     paper_bgcolor = 'rgba(0,0,0,0)',
                     plot_bgcolor = 'rgba(0,0,0,0)')
 
-layout2_1 = go.Layout(title = 'Variação nos aeródromos por capital',
+layout_variacao_capital = go.Layout(title = 'Variação nos aeródromos por capital',
                       xaxis ={'title': 'Aeródromos das capitais'},
                       yaxis ={'title': 'Variação (%)'},
                       xaxis_tickangle = -45,
                       paper_bgcolor = 'rgba(0,0,0,0)',
                       plot_bgcolor = 'rgba(0,0,0,0)')
 
-layout3 = go.Layout(title = 'Movimento das Regiões',#Adiciona um título ao gráfico
-                    xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
-                    yaxis = {'title': 'Movimentação de passageiros'},#adiciona um 'sentido' a y
-                    xaxis_tickangle=-45,#'angulação do estados para melhor visualização
+layout_barra_regioes = go.Layout(title = 'Movimento das Regiões',
+                    xaxis = {'title': 'Regiões'},
+                    yaxis = {'title': 'Movimentação de passageiros'},
+                    xaxis_tickangle=-45,
                     paper_bgcolor='rgba(0,0,0,0)',
                     plot_bgcolor='rgba(0,0,0,0)')
 
-layout3_1 = go.Layout(title = 'Variação das Regiões',#Adiciona um título ao gráfico
-                      xaxis = {'title': 'Regiões'},#adiciona um 'sentido' a x
-                      yaxis = {'title': 'Variação (%)'},#adiciona um 'sentido' a y
-                      xaxis_tickangle=-45,#'angulação do estados para melhor visualização
+layout_variacao_regioes = go.Layout(title = 'Variação das Regiões',
+                      xaxis = {'title': 'Regiões'},
+                      yaxis = {'title': 'Variação (%)'},
+                      xaxis_tickangle=-45,
                       paper_bgcolor='rgba(0,0,0,0)',
                       plot_bgcolor='rgba(0,0,0,0)')
 
-layout3_2 = go.Layout(title = 'Somatório de Jan 2020 & Jan 2021',
+layout_stack_regioes = go.Layout(title = 'Somatório de Jan 2020 & Jan 2021',
                       xaxis = {'title': 'Regiões'},
                       yaxis = {'title': 'Movimentação de passageiros'},
                       barmode = 'stack',
                       paper_bgcolor='rgba(0,0,0,0)',
                       plot_bgcolor='rgba(0,0,0,0)')
 
-sub.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021 para cada Estado')
+pie_graph_capitais.update_layout(title_text='Porcentagem de voos em Jan 2020 & Jan 2021 para cada Estado')
 
-data1 = [barra1, barra1_1]
-data1_1 = [linha1, pontos1]
-data2 = [barra2, barra2_1]
-data2_1 = [linha2, pontos2]
-data3 = [barra_3,barra_3_1]
-data3_1 = [linha3, pontos3]
-data3_2 = [stack1, stack2]
+data_estados_barra = [barra_estados_2020, barra_estados_2021]
+data_estados_variacao = [linha_variacao_estados, ponto_variacao_estados]
+data_capitais_barra = [barra_capitais_2020, barra_capitais_2021]
+data_capitais_variacao = [linha_variacao_capitais, ponto_variacao_capitais]
+data_regioes_barra = [barra_regioes_2020,barra_regioes_2021]
+data_regioes_variacao = [linha_variacao_regioes, ponto_variacao_regioes]
+data_regioes_stack = [stack_regioes_2020, stack_regioes_2021]
 
-fig1 = go.Figure(data = data1,layout = layout1)
-fig1_1 = go.Figure(data = data1_1,layout = layout1_1)
-fig1_2 = go.Figure(data=[go.Pie(labels=estados, values=quantidade_2020_1 + quantidade_2021_1)])
-fig1_2.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Estado')
-fig2 = go.Figure(data = data2,layout = layout2)
-fig2_1 = go.Figure(data = data2_1,layout = layout2_1)
-fig3 = go.Figure(data = data3,layout = layout3)
-fig3_1 = go.Figure(data = data3_1,layout = layout3_1)
-fig3_2 = go.Figure(data = data3_2,layout = layout3_2)
+fig_barras_estados = go.Figure(data = data_estados_barra,layout = layout_barra_estados)
+fig_variacao_estados = go.Figure(data = data_estados_variacao,layout = layout_variacao_estados)
+fig_pizza_estados = go.Figure(data=[go.Pie(labels=estados, values=quantidade_2020_1 + quantidade_2021_1)])
+fig_pizza_estados.update_layout(title_text='Porcentagem de voos em Jan 2020 + Jan 2021 para cada Estado')
+fig_barra_capitais = go.Figure(data = data_capitais_barra,layout = layout_barra_capital)
+fig_variacao_capitais = go.Figure(data = data_capitais_variacao,layout = layout_variacao_capital)
+fig_barras_regioes = go.Figure(data = data_regioes_barra,layout = layout_barra_regioes)
+fig_variacao_regioes = go.Figure(data = data_regioes_variacao,layout = layout_variacao_regioes)
+fig_stack_regioes = go.Figure(data = data_regioes_stack,layout = layout_stack_regioes)
 
-py.iplot(fig3_2)
-py.iplot(fig3)
-py.iplot(fig3_1)
-fig1_2.show()
-py.iplot(fig1)
-py.iplot(fig1_1)
-sub.show()
-py.iplot(fig2)
-py.iplot(fig2_1)
+pie_graph_capitais.show()
+py.iplot(fig_barra_capitais)
+py.iplot(fig_variacao_capitais)
+
+fig_pizza_estados.show()
+py.iplot(fig_barras_estados)
+py.iplot(fig_variacao_estados)
+
+py.iplot(fig_stack_regioes)
+py.iplot(fig_barras_regioes)
+py.iplot(fig_variacao_regioes)
