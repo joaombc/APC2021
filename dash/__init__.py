@@ -81,7 +81,7 @@ quantidade_2020_2 = dados2[:, 3]  # Jan 2020
 quantidade_2021_2 = dados2[:, 4]  # Jan 2021
 taxa_de_variacao2 = dados2[:, 5]  # Variação
 
-regioes = ['Sudoeste', 'Nordeste', 'Sul', 'Centro-Oeste', 'Norte']
+regioes = ['Sudeste', 'Nordeste', 'Sul', 'Centro-Oeste', 'Norte']
 reg_2020 = [sd_2020, ne_2020, sul_2020, co_2020, no_2020]
 reg_2021 = [sd_2021, ne_2021, sul_2021, co_2021, no_2021]
 reg_variacao = [round(100 * (sd_2021 / sd_2020) - 100, 2), round(100 * (ne_2021 / ne_2020) - 100, 2),
